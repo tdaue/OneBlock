@@ -17,6 +17,7 @@ import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.util.Vector;
 
 import oneblock.PlayerInfo;
+import oneblock.utils.Scheduler;
 
 public class BlockEvent implements Listener {
 	protected static final double DROP_TELEPORT_HEIGHT_OFFSET = 0.8;
@@ -56,6 +57,6 @@ public class BlockEvent implements Listener {
 		if (block.getX() != result[0]) return;
 		if (block.getZ() != result[1]) return;
 		
-		Bukkit.getScheduler().runTaskLater(plugin, () -> {plugin.BlockGen(result[0], result[1], plID, ponl, block);}, 1L);
+		Scheduler.runAtLater(block.getLocation(), () -> {plugin.BlockGen(result[0], result[1], plID, ponl, block);}, 1L);
 	}
 }

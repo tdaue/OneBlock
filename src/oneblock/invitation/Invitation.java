@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import oneblock.CommandHandler;
+import oneblock.utils.Scheduler;
 import oneblock.OneBlock;
 import oneblock.PlayerInfo;
 
@@ -35,8 +36,7 @@ public class Invitation extends AbstractInvitation {
 				return;
     	Invitation inv_ = new Invitation(name, to);
     	Invitation.list.add(inv_);
-    	Bukkit.getScheduler().runTaskLater(OneBlock.plugin, 
-    			() -> { Invitation.list.remove(inv_); }, 300L);
+    	Scheduler.runLater(() -> { Invitation.list.remove(inv_); }, 300L);
     }
 	
 	public static Invitation check(UUID uuid) {

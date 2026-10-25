@@ -3,6 +3,8 @@ package oneblock.placement;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 
+import oneblock.utils.Scheduler;
+
 public abstract class Place {
 	
 	public enum Type
@@ -49,7 +51,8 @@ public abstract class Place {
 	    if (!playerName.isEmpty()) //if (playerName != null) 
 	    	dispatched = dispatched.replace("{player}", playerName);
 	    
-	    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), dispatched);
+	    final String command_ = dispatched;
+	    Scheduler.run(() -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command_));
 	    return true;
 	}
 }
